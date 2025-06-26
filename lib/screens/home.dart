@@ -10,13 +10,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Mejores Animes')),
-      body: BlocBuilder<AnimeBloc, AnimeState>( //y => escuchar aniime bloc y anime statee
-        builder: (context, state) {//y => recibir estado del bloc
-          if (state is AnimeLoading) { //y => mostrar imagen de carga si estado es loading
-            return Center(
-              child: Image.asset('assets/images/loading.gif'),
-            );
-          } else if (state is AnimeLoaded) {//y => regresar custom swiper con animes si estado es loaded
+      body: BlocBuilder<AnimeBloc, AnimeState>(
+        //y => escuchar aniime bloc y anime statee
+        builder: (context, state) {
+          //y => recibir estado del bloc
+          if (state is AnimeLoading) {
+            //y => mostrar imagen de carga si estado es loading
+            return Center(child: CircularProgressIndicator());
+          } else if (state is AnimeLoaded) {
+            //y => regresar custom swiper con animes si estado es loaded
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +32,7 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           }
-          return Container();//y => si estado no es cargando ni cargado regresar contenedor vacio
+          return Container(); //y => si estado no es cargando ni cargado regresar contenedor vacio
         },
       ),
     );
